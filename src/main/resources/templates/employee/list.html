@@ -7,9 +7,26 @@
 <body>
 <div>
     <h3>The Employees</h3>
-    <div th:each="e : ${employees}">
-        <p th:text="${e.name}"></p>
-    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subscribed</th>
+            <th>Actions</th>
+            <th>Added</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="e : ${employees}">
+                <td th:text="${e.name}">Name</td>
+                <td th:text="${e.email}">Email</td>
+                <td th:text="${e.subscribed ? 'Yes' : 'No'}">Yes|No</td>
+                <td><a href="#">View</a> <a href="#">Edit</a></td>
+                <td th:text="${#temporals.format(e.dateCreated, 'dd/MM/yyyy - HH:mm')}">Date Created</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
