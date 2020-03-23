@@ -9,6 +9,8 @@ public interface EmployeeService {
 
     Employee save(Employee employee);
 
+    Optional<Employee> findById(Long id);
+
     List<Employee> findAll();
 
     Optional<Employee> findByEmail(String email);

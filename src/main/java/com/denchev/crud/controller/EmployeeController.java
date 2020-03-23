@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -52,5 +54,14 @@ public class EmployeeController {
     }
     // Creating New Employee
 
-
+    // Read Employee
+    @GetMapping(path = "/employee/{id}/view", name = "employee_view")
+    public ModelAndView viewEmployee(@PathVariable Long id) {
+        Optional<Employee> e = employeeService.findById(id);
+        if (!e.isPresent()) {
+            throw new RuntimeException();
+        }
+        return new ModelAndView("employee/view", "employee", e.get());
+    }
+    // Read Employee
 }

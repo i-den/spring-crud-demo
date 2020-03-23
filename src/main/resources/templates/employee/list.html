@@ -22,7 +22,7 @@
                 <td th:text="${e.name}">Name</td>
                 <td th:text="${e.email}">Email</td>
                 <td th:text="${e.subscribed ? 'Yes' : 'No'}">Yes|No</td>
-                <td><a href="#">View</a> <a href="#">Edit</a></td>
+                <td><a th:href="@{/employee/{id}/view(id=${e.id})}">View</a> <a href="#">Edit</a></td>
                 <td th:text="${#temporals.format(e.dateCreated, 'dd/MM/yyyy - HH:mm')}">Date Created</td>
             </tr>
         </tbody>

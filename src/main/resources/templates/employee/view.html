@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Employee</h3>
+<p>Name: <span th:text="${employee.name}">Name</span></p>
+<p>Email: <span th:text="${employee.email}">Email</span></p>
+<p>Age: <span th:text="${employee.age}">Age</span></p>
+<p>Subscribed: <span th:text="${employee.subscribed ? 'Yes' : 'No'}">Yes|No</span></p>
+<p>Date Created: <span th:text="${#temporals.format(employee.dateCreated, 'yyyy/MM/dd')}">Date Created</span></p>
+<p>Date Updated: <span th:text="${#temporals.format(employee.dateUpdated, 'yyyy/MM/dd')}">Date Updated</span></p>
+</body>
+</html>
