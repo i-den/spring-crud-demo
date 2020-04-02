@@ -4,7 +4,6 @@ import com.denchev.crud.validator.EmployeeUniqueEmail;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,7 +15,9 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class EmployeeAddCommand {
+public class EmployeeEditCommand {
+
+    private Long id;
 
     @NotNull(message = "The Employee's name is required")      // Name: null
     @NotBlank(message = "The Employee's name cannot be only white spaces") // Name: "   "
@@ -29,7 +30,6 @@ public class EmployeeAddCommand {
     @NotBlank(message = "The Employee's email cannot be only white spaces")
     @NotEmpty(message = "The Employee's email cannot be empty")
     @Email(message = "The entry is not a valid email address")
-    @EmployeeUniqueEmail
     private String email;
 
     @NotNull(message = "The Employee's age must be a valid positive number")
@@ -39,5 +39,4 @@ public class EmployeeAddCommand {
 
     @NotNull(message = "Should choose whether the Employee is subscribed or not")
     private Boolean subscribed;
-
 }

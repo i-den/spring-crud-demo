@@ -1,5 +1,6 @@
 package com.denchev.crud.service;
 
+import com.denchev.crud.command.employee.EmployeeEditCommand;
 import com.denchev.crud.entity.Employee;
 
 import java.util.List;
@@ -14,4 +15,10 @@ public interface EmployeeService {
     List<Employee> findAll();
 
     Optional<Employee> findByEmail(String email);
+
+    Employee updateEmployeeProperties(Employee employee, EmployeeEditCommand employeeEditCommand);
+
+    Employee updateEmployee(Employee employee);
+
+    boolean isUpdatedEmailUnique(Employee employee, String email);
 }

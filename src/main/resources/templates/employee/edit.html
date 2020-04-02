@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editing Employee</title>
+</head>
+<body>
+<form th:object="${employeeEditCommand}" th:action="@{/employee/{id}/update(id=${employeeEditCommand.id})}" method="POST">
+    <p th:if="${#fields.hasErrors()}" th:text="'Fix Errors'"></p>
+    <div>
+        <label for="name">Name: </label>
+        <input id="name" th:field="*{name}">
+        <ul th:if="${#fields.hasErrors('name')}">
+            <li th:each="error : ${#fields.errors('name')}" th:text="${error}">Error Message</li>
+        </ul>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input id="email" th:field="*{email}">
+        <ul th:if="${#fields.hasErrors('email')}">
+            <li th:each="error : ${#fields.errors('email')}" th:text="${error}">Error Message</li>
+        </ul>
+    </div>
+
+    <div>
+        <label for="age">Age</label>
+        <input id="age" th:field="*{age}" type="number" min="0" max="122">
+        <ul th:if="${#fields.hasErrors('age')}">
+            <li th:each="error : ${#fields.errors('age')}" th:text="${error}">Error Message</li>
+        </ul>
+    </div>
+
+    <div>
+        <label for="subscribed">Subscribed</label>
+        <input id="subscribed" type="checkbox" th:field="*{subscribed}">
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
