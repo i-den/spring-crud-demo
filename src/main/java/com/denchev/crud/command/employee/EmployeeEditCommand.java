@@ -1,6 +1,5 @@
 package com.denchev.crud.command.employee;
 
-import com.denchev.crud.validator.EmployeeUniqueEmail;
 import lombok.Getter;
 import lombok.Setter;
 

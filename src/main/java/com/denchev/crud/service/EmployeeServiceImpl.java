@@ -63,5 +63,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return false;
     }
 
+    @Override
+    public void deleteEmployee(Employee employee) {
+        employeeRepository.delete(employee);
+    }
 
 }

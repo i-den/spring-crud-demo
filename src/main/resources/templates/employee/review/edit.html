@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editing Review</title>
+</head>
+<body>
+<form method="POST" th:object="${employeeReviewEditCommand}" th:action="@{/employee/review/{id}/edit(id=${employeeReviewEditCommand.id})}">
+    <label for="content">Content</label>
+    <input id="content" th:field="*{content}">
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

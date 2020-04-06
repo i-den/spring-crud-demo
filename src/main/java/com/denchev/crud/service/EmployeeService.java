@@ -21,4 +21,6 @@ public interface EmployeeService {
     Employee updateEmployee(Employee employee);
 
     boolean isUpdatedEmailUnique(Employee employee, String email);
+
+    void deleteEmployee(Employee employee);
 }

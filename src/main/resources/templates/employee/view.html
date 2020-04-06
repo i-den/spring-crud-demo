@@ -10,7 +10,45 @@
 <p>Email: <span th:text="${employee.email}">Email</span></p>
 <p>Age: <span th:text="${employee.age}">Age</span></p>
 <p>Subscribed: <span th:text="${employee.subscribed ? 'Yes' : 'No'}">Yes|No</span></p>
-<p>Date Created: <span th:text="${#temporals.format(employee.dateCreated, 'yyyy/MM/dd')}">Date Created</span></p>
-<p>Date Updated: <span th:text="${#temporals.format(employee.dateUpdated, 'yyyy/MM/dd')}">Date Updated</span></p>
+<p>Date Created: <span th:text="${#temporals.format(employee.employeeAudit.dateCreated, 'yyyy/MM/dd')}">Date Created</span></p>
+<p>Date Updated: <span th:text="${#temporals.format(employee.employeeAudit.dateUpdated, 'yyyy/MM/dd')}">Date Updated</span></p>
+<form method="POST" th:action="@{/employee/{id}/delete(id=${employee.id})}">
+    <button>Delete</button>
+</form>
+
+<th:block th:if="${!employee.employeeReviews.isEmpty()}">
+<table>
+    <thead>
+    <tr>
+        <th>Review</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employeeReview: ${employee.employeeReviews}">
+        <td th:text="${employeeReview.content}">Content</td>
+        <td><a th:href="@{/employee/review/{id}/edit(id=${employeeReview.id})}">Edit</a></td>
+        <td>
+            <form style="visibility: hidden" th:action="@{/employee/review/{id}/delete(id=${employeeReview.id})}" method="POST">
+                <button style="visibility: visible">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</th:block>
+
+<div>
+    <form th:object="${employeeReviewAddCommand}" th:action="@{/employee/review/add}" method="post" >
+        <input type="hidden" th:value="${employee.id}" th:name="'id'">
+        <label for="review">Add Review:</label>
+        <input id="review" type="text" th:field="*{content}">
+        <ul th:if="${#fields.hasErrors('content')}">
+            <li th:each="error : ${#fields.errors('content')}" th:text="${error}">Error Message</li>
+        </ul>
+        <button>Add Review</button>
+    </form>
+</div>
 </body>
 </html>
