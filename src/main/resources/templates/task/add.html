@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${addTaskCommand}" th:action="@{/task/new}" method="POST">
+<!--    <select id="employee" th:field="*{employeeId}">-->
+<!--        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name} + ' / ' + ${employee.email}">Employee Name</option>-->
+<!--    </select>-->
+
+    <label for="description">Description</label>
+    <input id="description" type="text" th:field="*{description}">
+
+    <th:block th:each="employee : ${employees}">
+        <div>
+            <label th:for="'employee-' + ${employee.id}" th:text="${employee.name} + '-' + ${employee.email}"></label>
+            <input th:id="'employee-' + ${employee.id}" type="checkbox" th:field="*{employeeIds}" th:value="${employee.id}">
+        </div>
+    </th:block>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

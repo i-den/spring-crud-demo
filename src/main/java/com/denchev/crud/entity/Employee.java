@@ -12,8 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Employee")
@@ -32,7 +37,7 @@ public class Employee {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name ="age", nullable = false)
+    @Column(name = "age", nullable = false)
     private Integer age;
 
     @Column(name = "subscribed", nullable = false)
@@ -47,7 +52,15 @@ public class Employee {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    private Set<EmployeeReview> employeeReviews;
+    private Set<EmployeeReview> employeeReviews = new HashSet<>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "employee_task",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id")
+    )
+    private Set<Task> tasks;
 
     public void addEmployeeReview(EmployeeReview employeeReview) {
         employeeReview.setEmployee(this);
@@ -59,4 +72,13 @@ public class Employee {
         employeeReviews.remove(employeeReview);
     }
 
+    public void addTask(Task task) {
+        task.addEmployee(this);
+        tasks.add(task);
+    }
+
+    public void removeTask(Task task) {
+        task.removeEmployee(this);
+        tasks.remove(task);
+    }
 }
